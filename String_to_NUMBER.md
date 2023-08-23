@@ -42,27 +42,33 @@ In gforth and ANSI Forth, `>number` is a powerful word used to convert a string 
    - The updated accumulator with the numeric value.
    - The updated address and length of the string, showing how much of the string was processed.
 
-5. **Cleaning Up**: Typically, you would drop the updated address and length, leaving the converted number on the stack.
+5. **Cleaning Up**: Typically, you would drop the updated address and length, and then drop the remaining accumulator value from the stack, leaving the converted number.
 
    ```forth
    2DROP  \ Drops the updated address and length
+   DROP   \ Drops the high word of the double accumulator, leaving the actual number
    ```
 
-### Complete Example
+### Interactive gforth Output:
 
-```forth
-: convert-string-to-number
-   0 s>d        \ Convert 0 to double precision for the accumulator
-   S" 1234"     \ Push the string address and length
-   >number      \ Convert the string to a number
-   2DROP        \ Discard the updated address and length
-   DROP         \ Drop the high word of the double accumulator, leaving the actual number
-;
-
-convert-string-to-number .  \ This will display "1234"
 ```
-
----
+Gforth 0.7.3, Copyright (C) 1995-2008 Free Software Foundation, Inc.
+Gforth comes with ABSOLUTELY NO WARRANTY; for details type `license'
+Type `bye' to exit
+DECIMAL  \ Set the numeric base to decimal  ok
+.S <0>  ok
+0 s>d  \ Converts 0 to double precision and pushes to the stack  ok
+.S <2> 0 0  ok
+S" 1234"  \ Pushes address and length of the string "1234" onto the stack  ok
+.S <4> 0 0 94614057418416 4  ok
+>number  ok
+.S <4> 1234 0 94614057418420 0  ok
+2DROP  \ Drops the updated address and length  ok
+.S <2> 1234 0  ok
+DROP \ Drops the accumulator from the stack  ok    
+.S <1> 1234  ok
+. 1234  ok
+```
 
 ### Definition of `>number` in gforth and ANSI Forth
 
