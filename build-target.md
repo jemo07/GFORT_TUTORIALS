@@ -199,12 +199,12 @@ To store the address of targetAlso in the interpretation table, we simply enter 
 ```forth
 ' targetAlso 'doWord 3 CELLS + !
 ```
-How the newly compiled word is remotely executed on the target :
+### How the newly compiled word is remotely executed on the target :
 
 At the beginning of a colon word is a jump to `doLIST`, which processes the word by threading through the addresses (other Forth words) in the definition. If the host is not in target compiling mode when a target clone is executed, the clone's code address is transmitted to the target instead of getting compiled into a new definition. The target system has a small monitor routine, affectionately called the "mini-interpreter", which picks up this code address and passes it to doLIST for execution. Since the mini-interpreter is the first address in the threading chain, it is the point that execution returns to when the Forth program (starting from the code address, a high level word) is finished.
 Communication between host and target
 
-Target to host communication interface
+## Target to host communication interface
 
 The embedded target, in addition to containing the executable Forth nucleus words and the inner interpreter mechanism, has a small assembly level routine (the mini-interpreter) for communicating with the host computer. This routine recognizes two commands :
 
