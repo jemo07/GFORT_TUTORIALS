@@ -1,9 +1,11 @@
 
----
+
 
 ## Working with Memory in FORTH
 
-In this tutorial, we'll explore the process of manipulating memory in FORTH. Using a simple example, we'll create a memory space, define words to examine it, add references, and more.
+In this tutorial, I'm exploring the process of manipulating memory in FORTH. Using a simple example, I have created a memory space, define words to examine it, add references, and more.
+
+---
 
 ### 1. Creating Memory Space
 ```forth
@@ -56,11 +58,29 @@ Then, two more words `TC,` and `T,` are defined to insert values into the target
 ```
 
 ### 5. Interacting with the Target Space
-After initializing the `TARGET` with zeroes using `REVIEW`, we then add bytes to it.
+
+After initializing the `TARGET` with zeroes, we can visualize its current state using the `REVIEW` word:
+
+```text
+
+  ok
+REVIEW  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ok
+
+```
+
+We then add bytes to the `TARGET` using the `TC,` word:
+
 ```forth
-REVIEW
 1 TC, 2 TC, 3 TC,
-REVIEW
+```
+
+Reviewing the memory space again, we observe the bytes we just added:
+
+```text
+
+1 TC, 2 TC, 3 TC,  ok
+REVIEW  00 01 02 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ok
+
 ```
 
 ### Full Code with Comments:
@@ -100,6 +120,6 @@ VARIABLE TP ( Target Pointer) 1 TP !
 
 ---
 
-That concludes our tutorial on working with memory in FORTH. We hope it helped in understanding the intricacies and capabilities of FORTH when it comes to memory management.
+That concludes our tutorial on working with memory in FORTH. I hope it helped in understanding the intricacies and capabilities of FORTH when it comes to memory management. It has helped me ` allot ` with working with buffers and viartual memory in Forth. Feel free to contribute and add to this tutorial with more real life experiances. 
 
 ---
